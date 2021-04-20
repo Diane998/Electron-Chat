@@ -6,6 +6,7 @@ import Home from './views/Home';
 import Settings from './views/Settings';
 import Login from './views/Login';
 import Register from './views/Register';
+import Chat from './views/Chat';
 
 const App = () => {
   // const sendNotification = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/settings' component={Settings} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/chat' component={Chat} />
         </Switch>
       </div>
     </HashRouter>
