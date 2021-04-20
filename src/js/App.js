@@ -1,8 +1,11 @@
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import Home from './views/Home';
 import NavBar from './components/NavBar';
+import Home from './views/Home';
+import Settings from './views/Settings';
+import Login from './views/Login';
+import Register from './views/Register';
 
 const App = () => {
   // const sendNotification = () => {
@@ -15,9 +18,9 @@ const App = () => {
       <div className='content-wrapper'>
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/settings' exact component={() => <h1>Settings</h1>} />
-          <Route path='/login' exact component={() => <h1>Log in</h1>} />
-          <Route path='/register' exact component={() => <h1>register</h1>} />
+          <Route path='/settings' component={Settings} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
         </Switch>
       </div>
     </HashRouter>
