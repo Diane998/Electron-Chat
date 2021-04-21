@@ -4,8 +4,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './views/Home';
 import Settings from './views/Settings';
-import Login from './views/Login';
-import Register from './views/Register';
+import Welcome from './views/Welcome';
 import Chat from './views/Chat';
 
 const App = () => {
@@ -18,10 +17,9 @@ const App = () => {
       <NavBar />
       <div className='content-wrapper'>
         <Switch>
-          <Route path='/' exact component={Home} />
+          <Route path='/' exact component={Welcome} />
+          <Route path='/home' component={Home} />
           <Route path='/settings' component={Settings} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
           <Route path='/chat/:id' component={Chat} />
         </Switch>
       </div>
