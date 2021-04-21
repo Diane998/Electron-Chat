@@ -1,23 +1,27 @@
 import React, { useEffect } from 'react';
-import { fetchChats } from '../api/chats';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchChats } from '../redux/chats/chatActions';
 
 import JoinedChatsList from '../components/JoinedChatsList';
 import AvailableChats from '../components/AvailableChats';
 import Title from '../components/shared/Title';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const chats = useSelector(state => state.chats.items);
+
   useEffect(() => {
-    fetchChats();
+    dispatch(fetchChats());
   }, []);
 
   return (
     <div className='row no-gutters fh'>
       <div className='col-3 fh'>
-        <JoinedChatsList />
+        <JoinedChatsList chats={chats} />
       </div>
       <div className='col-9 fh'>
         <Title text='Choose your channel' />
-        <AvailableChats />
+        <AvailableChats chats={chats} />
       </div>
     </div>
   );
