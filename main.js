@@ -1,6 +1,19 @@
 const { app, BrowserWindow, Notification, ipcMain } = require('electron'),
-  path = require('path');
+  path = require('path'),
+  os = require('os');
 const isDev = !app.isPackaged;
+
+const installExtensions = async () => {
+  const installer = require('electron-devtools-installer');
+  const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
+
+  return Promise.all(
+    extensions.map(name => installer.default(installer[name], forceDownload))
+  )
+    .then(name => console.log(`Added Extension: ${name}`))
+    .catch(err => console.log('An error occurred: ', err));
+};
 
 let win;
 
@@ -21,6 +34,10 @@ function createWindow() {
 
   win.loadFile('index.html');
   isDev && win.webContents.openDevTools();
+
+  win.on('close', () => {
+    win = null;
+  });
 }
 
 if (isDev) {
@@ -29,7 +46,9 @@ if (isDev) {
   });
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  await installExtensions(); // devtools extensions
+
   createWindow();
   // const notification = new Notification({
   //   title: 'hello',
